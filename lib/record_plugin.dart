@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 
 typedef void OnTimerCallback(int second);
 
+///录音工具类
 class RecordPlugin {
   static const MethodChannel _channel =
       const MethodChannel('record_plugin');

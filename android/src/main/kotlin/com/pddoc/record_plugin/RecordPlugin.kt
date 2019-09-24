@@ -34,10 +34,6 @@ class RecordPlugin : MethodCallHandler {
          */
         private var currentConfig = RecordConfig()
 
-        private var mTimer = Timer()
-        private val recordHandler = Handler()
-
-        private var recorderTicker: Runnable? = null
 
         private var isStart = false
         private var isPause = false
@@ -100,7 +96,7 @@ class RecordPlugin : MethodCallHandler {
     override fun onMethodCall(call: MethodCall, result: Result) {
 
         val path = call.argument<String>("path")
-        
+
 
 
         when (call.method) {
@@ -122,7 +118,7 @@ class RecordPlugin : MethodCallHandler {
             }
 
             "startPlay" -> {
-                startPlay(path+"")
+                startPlay(path + "")
                 result.success("startPlay")
             }
 
@@ -149,9 +145,6 @@ class RecordPlugin : MethodCallHandler {
             }
         }
 
-        recordHandler.removeCallbacksAndMessages(null)
-
-
         RecordHelper.getInstance().start(getFilePath(), currentConfig)
     }
 
@@ -167,16 +160,18 @@ class RecordPlugin : MethodCallHandler {
         RecordHelper.getInstance().stop()
     }
 
-    fun startPlay(path : String) {
+    fun startPlay(path: String) {
         MediaManager.playSound(path) {
             //播放完成的监听事件
             MediaManager.release()
-                    channel.invokeMethod("audioPlayerDidFinishPlaying", "")
+            channel.invokeMethod("audioPlayerDidFinishPlaying", "")
         }
     }
+
     fun pausePlay() {
         MediaManager.pause()
     }
+
     fun resumePlay() {
         MediaManager.resume()
     }

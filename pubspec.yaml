@@ -1,8 +1,8 @@
 name: record_plugin
 description: A new Flutter plugin.
 version: 0.0.1
-author:
-homepage:
+author: wzy <373376570@qq.com>
+homepage: 'https://github.com/wangzy2u'
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

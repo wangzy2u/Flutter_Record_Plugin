@@ -101,8 +101,8 @@ class RecordPlugin : MethodCallHandler {
 
         when (call.method) {
             "startRecord" -> {
-                startRecord()
-                result.success("startRecord")
+                startRecord(result)
+
             }
             "pauseRecord" -> {
                 pauseRecord()
@@ -137,15 +137,17 @@ class RecordPlugin : MethodCallHandler {
     }
 
 
-    fun startRecord() {
+    fun startRecord(result: Result) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (reg.activity().checkSelfPermission(Manifest.permission.RECORD_AUDIO) !== PackageManager.PERMISSION_GRANTED || reg.activity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) !== PackageManager.PERMISSION_GRANTED) {
                 reg.activity().requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
+                result.success("error")
                 return
             }
         }
 
         RecordHelper.getInstance().start(getFilePath(), currentConfig)
+        result.success("startRecord")
     }
 
     fun pauseRecord() {

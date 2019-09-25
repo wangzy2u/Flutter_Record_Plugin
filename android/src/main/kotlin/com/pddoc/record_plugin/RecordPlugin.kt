@@ -48,7 +48,7 @@ class RecordPlugin : MethodCallHandler {
                     Environment.getExternalStorageDirectory().absolutePath)
             //设置格式为MP3
             currentConfig.format = RecordConfig.RecordFormat.MP3
-            currentConfig.sampleRate = 16000
+            currentConfig.sampleRate = 8000
             currentConfig.encodingConfig = AudioFormat.ENCODING_PCM_16BIT
             currentConfig.recordDir = recordDir
             initRecordEvent()

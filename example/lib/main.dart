@@ -21,40 +21,30 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     recordPlugin = new RecordPlugin();
-    initPlatformState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await RecordPlugin.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
 
   void startRecorder() async{
-    try {
+
       recordPlugin.startRecord();
+      try {
+
+        recordPlugin.recordCallback = (result){
+          setState(() {
+            _platformVersion = result;
+          });
+        };
+
+        _recorderSubscription = recordPlugin.onRecorderStateChanged.listen((e) {
+
+          this.setState(() {
+            this._platformVersion = e.toString();
+          });
+        });
       print('startRecorder: $path');
 
-      _recorderSubscription = recordPlugin.onRecorderStateChanged.listen((e) {
 
-        this.setState(() {
-          this._platformVersion = e.toString();
-        });
-      });
 
     } catch (err) {
       print('startRecorder error: $err');
@@ -113,11 +103,11 @@ class _MyAppState extends State<MyApp> {
                     recordPlugin.stopRecord().then((result){
                       setState(() {
                         path = result;
-                        _platformVersion = result;
-                        if (_recorderSubscription != null) {
+                       // _platformVersion = result;
+                        /*if (_recorderSubscription != null) {
                           _recorderSubscription.cancel();
                           _recorderSubscription = null;
-                        }
+                        }*/
                       });
                     });
                   },
@@ -130,7 +120,7 @@ class _MyAppState extends State<MyApp> {
                   onPressed: (){
                     recordPlugin.startPlayer(path).then((result){
                       setState(() {
-                        _platformVersion = result;
+                        _platformVersion = result.toString();
                       });
                     });
                   },
@@ -143,7 +133,7 @@ class _MyAppState extends State<MyApp> {
                   onPressed: (){
                     recordPlugin.pausePlayer().then((result){
                       setState(() {
-                        _platformVersion = result;
+                        _platformVersion = result.toString();
                       });
                     });
                   },
@@ -156,7 +146,7 @@ class _MyAppState extends State<MyApp> {
                   onPressed: (){
                     recordPlugin.resumePlayer().then((result){
                       setState(() {
-                        _platformVersion = result;
+                        _platformVersion = result.toString();
                       });
                     });
                   },
@@ -169,7 +159,7 @@ class _MyAppState extends State<MyApp> {
                   onPressed: (){
                     recordPlugin.stopPlayer().then((result){
                       setState(() {
-                        _platformVersion = result;
+                        _platformVersion = result.toString();
                       });
                     });
                   },

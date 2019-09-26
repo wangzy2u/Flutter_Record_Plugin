@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 typedef void OnTimerCallback(int second);
-
+typedef void RecordCallback(String result);
 ///录音工具类
 class RecordPlugin {
   static const MethodChannel _channel = const MethodChannel('record_plugin');
@@ -18,33 +18,36 @@ class RecordPlugin {
 
   Stream<PlayStatus> get onPlayerStateChanged => _playerController.stream;
 
-  RecordPlugin();
+  RecordCallback _recordCallback;
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+
+  set recordCallback(RecordCallback value) {
+    _recordCallback = value;
   }
 
+  RecordPlugin();
+
+
   Future startRecord() async {
-    final String version = await _channel.invokeMethod('startRecord');
+    final bool result = await _channel.invokeMethod('startRecord');
     _setRecorderCallback();
-    return version;
+    return result;
   }
 
   Future pauseRecord() async {
-    final String version = await _channel.invokeMethod('pauseRecord');
-    return version;
+    final bool result = await _channel.invokeMethod('pauseRecord');
+    return result;
   }
 
   Future resumeRecord() async {
-    final String version = await _channel.invokeMethod('resumeRecord');
-    return version;
+    final bool result = await _channel.invokeMethod('resumeRecord');
+    return result;
   }
 
   Future stopRecord() async {
-    final String version = await _channel.invokeMethod('stopRecord');
+    final String result = await _channel.invokeMethod('stopRecord');
     _removeRecorderCallback();
-    return version;
+    return result;
   }
 
   Future<void> _setRecorderCallback() async {
@@ -53,6 +56,7 @@ class RecordPlugin {
     }
 
     _channel.setMethodCallHandler((MethodCall call) {
+
       switch (call.method) {
         case 'PAUSE':
           if (_recorderController != null) _recorderController.add('PAUSE');
@@ -63,6 +67,11 @@ class RecordPlugin {
           break;
         case "STOP":
           if (_recorderController != null) _recorderController.add('STOP');
+          break;
+        case "RecordResult":
+          if ( _recordCallback !=null ) _recordCallback(call.arguments);
+          if (_recorderController != null) _recorderController.add('====='+call.arguments);
+          _removeRecorderCallback();
           break;
         case "FINISH":
           if (_recorderController != null) _recorderController.add('FINISH');
@@ -76,13 +85,13 @@ class RecordPlugin {
   }
 
   ///播放相关
-  Future<String> startPlayer(String uri) async {
+  Future<bool> startPlayer(String uri) async {
     if (this._isPlaying) {
       throw PlayerRunningException('Player is already playing.');
     }
 
     try {
-      String result = await _channel.invokeMethod('startPlay', {
+     bool result = await _channel.invokeMethod('startPlay', {
         'path': uri,
       });
       print('startPlayer result: $result');
@@ -95,24 +104,24 @@ class RecordPlugin {
     }
   }
 
-  Future<String> stopPlayer() async {
+  Future<bool> stopPlayer() async {
     if (!this._isPlaying) {
       throw PlayerStoppedException('Player already stopped.');
     }
     this._isPlaying = false;
 
-    String result = await _channel.invokeMethod('stopPlay');
+    bool result = await _channel.invokeMethod('stopPlay');
     _removePlayerCallback();
     return result;
   }
 
-  Future<String> pausePlayer() async {
-    String result = await _channel.invokeMethod('pausePlay');
+  Future<bool> pausePlayer() async {
+    bool result = await _channel.invokeMethod('pausePlay');
     return result;
   }
 
-  Future<String> resumePlayer() async {
-    String result = await _channel.invokeMethod('resumePlay');
+  Future<bool> resumePlayer() async {
+    bool result = await _channel.invokeMethod('resumePlay');
     return result;
   }
 

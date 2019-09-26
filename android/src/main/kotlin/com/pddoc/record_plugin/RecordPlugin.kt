@@ -48,7 +48,8 @@ class RecordPlugin : MethodCallHandler {
                     Environment.getExternalStorageDirectory().absolutePath)
             //设置格式为MP3
             currentConfig.format = RecordConfig.RecordFormat.MP3
-            currentConfig.sampleRate = 8000
+            currentConfig.sampleRate = 16000
+            currentConfig.channelConfig = AudioFormat.CHANNEL_IN_MONO
             currentConfig.encodingConfig = AudioFormat.ENCODING_PCM_16BIT
             currentConfig.recordDir = recordDir
             initRecordEvent()
@@ -58,7 +59,7 @@ class RecordPlugin : MethodCallHandler {
          * 初始化录音监听事件
          * */
         private fun initRecordEvent() {
-            RecordHelper.getInstance().setRecordStateListener(object : RecordStateListener {
+            /*RecordHelper.getInstance().setRecordStateListener(object : RecordStateListener {
                 override fun onStateChange(state: RecordHelper.RecordState) {
                     when (state) {
                         RecordHelper.RecordState.PAUSE -> channel.invokeMethod("PAUSE", "PAUSE")
@@ -76,18 +77,16 @@ class RecordPlugin : MethodCallHandler {
                 override fun onError(error: String) {
                     channel.invokeMethod("RecordState", error)
                 }
-            })
+            })*/
 
-            RecordHelper.getInstance().setRecordSoundSizeListener { soundSize ->
+            /*RecordHelper.getInstance().setRecordSoundSizeListener { soundSize ->
                 channel.invokeMethod("RecordSoundSize", soundSize)
-            }
+            }*/
             /**
              * 完成录音回调
              * */
             RecordHelper.getInstance().setRecordResultListener { result ->
                 channel.invokeMethod("RecordResult", result.absolutePath)
-
-                Toast.makeText(reg.context(), result.absolutePath, Toast.LENGTH_SHORT).show()
             }
             // RecordHelper.getInstance().setRecordFftDataListener(RecordFftDataListener { data -> audioView.setWaveData(data) })
         }
@@ -105,31 +104,25 @@ class RecordPlugin : MethodCallHandler {
 
             }
             "pauseRecord" -> {
-                pauseRecord()
-                result.success("pauseRecord")
+                pauseRecord(result)
             }
             "resumeRecord" -> {
-                resumeRecord()
-                result.success("resumeRecord")
+                resumeRecord(result)
             }
             "stopRecord" -> {
-                stopRecord()
-                result.success(getFilePath())
+                stopRecord(result)
             }
 
             "startPlay" -> {
-                startPlay(path + "")
-                result.success("startPlay")
+                startPlay(path + "",result)
             }
 
             "pausePlay" -> {
-                pausePlay()
-                result.success("pausePlay")
+                pausePlay(result)
             }
 
             "resumePlay" -> {
-                resumePlay()
-                result.success("resumePlay")
+                resumePlay(result)
             }
             else -> result.notImplemented()
         }
@@ -141,41 +134,76 @@ class RecordPlugin : MethodCallHandler {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (reg.activity().checkSelfPermission(Manifest.permission.RECORD_AUDIO) !== PackageManager.PERMISSION_GRANTED || reg.activity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) !== PackageManager.PERMISSION_GRANTED) {
                 reg.activity().requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
-                result.success("error")
+                result.success(false)
                 return
             }
         }
 
-        RecordHelper.getInstance().start(getFilePath(), currentConfig)
-        result.success("startRecord")
+        try {
+            RecordHelper.getInstance().start(getFilePath(), currentConfig)
+            result.success(true)
+        } catch (e: Exception) {
+            result.success(false)
+        }
+        
     }
 
-    fun pauseRecord() {
-        RecordHelper.getInstance().pause()
-    }
-
-    fun resumeRecord() {
-        RecordHelper.getInstance().resume()
-    }
-
-    fun stopRecord() {
-        RecordHelper.getInstance().stop()
-    }
-
-    fun startPlay(path: String) {
-        MediaManager.playSound(path) {
-            //播放完成的监听事件
-            MediaManager.release()
-            channel.invokeMethod("audioPlayerDidFinishPlaying", "")
+    fun pauseRecord(result: Result) {
+        try {
+            RecordHelper.getInstance().pause()
+            result.success(true)
+        } catch (e: Exception) {
+            result.success(false)
         }
     }
 
-    fun pausePlay() {
-        MediaManager.pause()
+    fun resumeRecord(result: Result) {
+        try {
+            RecordHelper.getInstance().resume()
+            result.success(true)
+        } catch (e: Exception) {
+            result.success(false)
+        }
     }
 
-    fun resumePlay() {
-        MediaManager.resume()
+    fun stopRecord(result: Result) {
+        try {
+            RecordHelper.getInstance().stop()
+            result.success(getFilePath())
+        } catch (e: Exception) {
+            result.success("")
+        }
+    }
+
+    fun startPlay(path: String,result: Result) {
+        try {
+            MediaManager.playSound(path) {
+                //播放完成的监听事件
+                MediaManager.release()
+                channel.invokeMethod("audioPlayerDidFinishPlaying", "")
+            }
+            result.success(true)
+        } catch (e: Exception) {
+            result.success(false)
+        }
+    }
+
+    fun pausePlay(result: Result) {
+        try {
+            MediaManager.pause()
+            result.success(true)
+        } catch (e: Exception) {
+            result.success(false)
+        }
+    }
+
+    fun resumePlay(result: Result) {
+        try {
+            MediaManager.resume()
+            result.success(true)
+        } catch (e: Exception) {
+            result.success(false)
+        }
     }
 
     /**

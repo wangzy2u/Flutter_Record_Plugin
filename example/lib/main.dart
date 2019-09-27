@@ -16,11 +16,14 @@ class _MyAppState extends State<MyApp> {
   String path = '';
   RecordPlugin recordPlugin;
   // ignore: unused_field
-  StreamSubscription _recorderSubscription;
+
+
   @override
   void initState() {
     super.initState();
     recordPlugin = new RecordPlugin();
+
+
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -28,20 +31,27 @@ class _MyAppState extends State<MyApp> {
   void startRecorder() async{
 
       recordPlugin.startRecord();
-      try {
+      recordPlugin.recordBus.on<PlayStatus>().listen((result){
+        setState(() {
+          _platformVersion = result.message;
+        });
 
+        print('stopPlay====================================:'+result.toString());
+      });
+
+      try {
         recordPlugin.recordCallback = (result){
           setState(() {
             _platformVersion = result;
           });
         };
 
-        _recorderSubscription = recordPlugin.onRecorderStateChanged.listen((e) {
+       /* _recorderSubscription = recordPlugin.onRecorderStateChanged.listen((e) {
 
           this.setState(() {
             this._platformVersion = e.toString();
           });
-        });
+        });*/
       print('startRecorder: $path');
 
 

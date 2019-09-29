@@ -124,6 +124,10 @@ class RecordPlugin : MethodCallHandler {
             "resumePlay" -> {
                 resumePlay(result)
             }
+
+            "stopPlay" -> {
+                stopPlay(result)
+            }
             else -> result.notImplemented()
         }
 
@@ -200,6 +204,15 @@ class RecordPlugin : MethodCallHandler {
     fun resumePlay(result: Result) {
         try {
             MediaManager.resume()
+            result.success(true)
+        } catch (e: Exception) {
+            result.success(false)
+        }
+    }
+
+    fun stopPlay(result: Result) {
+        try {
+            MediaManager.release()
             result.success(true)
         } catch (e: Exception) {
             result.success(false)

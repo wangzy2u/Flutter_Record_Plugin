@@ -38,27 +38,13 @@ class _MyAppState extends State<MyApp> {
 
         print('stopPlay====================================:'+result.toString());
       });
+      recordPlugin.recordBus.on<RecordStatus>().listen((result){
+        setState(() {
+          _platformVersion = result.message;
+        });
 
-      try {
-        recordPlugin.recordCallback = (result){
-          setState(() {
-            _platformVersion = result;
-          });
-        };
-
-       /* _recorderSubscription = recordPlugin.onRecorderStateChanged.listen((e) {
-
-          this.setState(() {
-            this._platformVersion = e.toString();
-          });
-        });*/
-      print('startRecorder: $path');
-
-
-
-    } catch (err) {
-      print('startRecorder error: $err');
-    }
+        print('stopPlay====================================:'+result.toString());
+      });
   }
 
   @override

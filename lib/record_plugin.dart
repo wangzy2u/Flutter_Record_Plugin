@@ -5,30 +5,15 @@ import 'package:flutter/services.dart';
 
 import 'RecordBus.dart';
 
-typedef void OnTimerCallback(int second);
-typedef void RecordCallback(String result);
 ///录音工具类
 class RecordPlugin {
   static const MethodChannel _channel = const MethodChannel('record_plugin');
   final RecordBus _recordBus = RecordBus();
   bool _isPlaying = false;
 
-  RecordCallback _recordCallback;
-
-
   RecordBus get recordBus => _recordBus;
 
-  RecordCallback get recordCallback => _recordCallback;
-
-  // ignore: unnecessary_getters_setters
-  set recordCallback(RecordCallback value) {
-    _recordCallback = value;
-  }
-
   RecordPlugin();
-
-
-
 
   Future startRecord() async {
     final bool result = await _channel.invokeMethod('startRecord');
@@ -53,7 +38,6 @@ class RecordPlugin {
 
   Future<void> _setRecorderCallback() async {
     _channel.setMethodCallHandler((MethodCall call) {
-
       switch (call.method) {
         case 'PAUSE':
           break;
@@ -64,7 +48,7 @@ class RecordPlugin {
         case "STOP":
           break;
         case "RecordResult":
-          if ( _recordCallback !=null ) _recordCallback(call.arguments);
+          recordBus.fire(RecordStatus(0, call.arguments));
           break;
         case "FINISH":
           break;
@@ -78,11 +62,12 @@ class RecordPlugin {
   ///播放相关
   Future<bool> startPlayer(String uri) async {
     if (this._isPlaying) {
-      throw PlayerRunningException('Player is already playing.');
+      return true;
+      //throw PlayerRunningException('Player is already playing.');
     }
 
     try {
-     bool result = await _channel.invokeMethod('startPlay', {
+      bool result = await _channel.invokeMethod('startPlay', {
         'path': uri,
       });
       print('startPlayer result: $result');
@@ -97,7 +82,8 @@ class RecordPlugin {
 
   Future<bool> stopPlayer() async {
     if (!this._isPlaying) {
-      throw PlayerStoppedException('Player already stopped.');
+      return true;
+      //throw PlayerStoppedException('Player already stopped.');
     }
     this._isPlaying = false;
 
@@ -123,7 +109,7 @@ class RecordPlugin {
           break;
         case "audioPlayerDidFinishPlaying":
           this._isPlaying = false;
-          recordBus.fire(PlayStatus(0,'playerFinish'));
+          recordBus.fire(PlayStatus(0, 'playerFinish'));
           break;
         default:
           throw new ArgumentError('Unknown method ${call.method}');
@@ -131,36 +117,18 @@ class RecordPlugin {
       return null;
     });
   }
-
 }
 
 class PlayStatus {
-  final int code;
+  final int status;
   final String message;
 
-  PlayStatus(this.code, this.message);
+  PlayStatus(this.status, this.message);
 }
 
-class PlayerRunningException implements Exception {
+class RecordStatus {
+  final int status;
   final String message;
 
-  PlayerRunningException(this.message);
-}
-
-class PlayerStoppedException implements Exception {
-  final String message;
-
-  PlayerStoppedException(this.message);
-}
-
-class RecorderRunningException implements Exception {
-  final String message;
-
-  RecorderRunningException(this.message);
-}
-
-class RecorderStoppedException implements Exception {
-  final String message;
-
-  RecorderStoppedException(this.message);
+  RecordStatus(this.status, this.message);
 }

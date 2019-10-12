@@ -1,12 +1,12 @@
 //
-//  PDAudioRecordEngine.m
+//  FlutterAudioRecordEngine.m
 //  pedi
 //
 //  Created by li xiaolin on 2017/12/11.
 //  Copyright © 2017年 北京嘉润云众健康科技有限公司. All rights reserved.
 //
 
-#import "PDAudioRecordEngine.h"
+#import "FlutterAudioRecordEngine.h"
 #import "lame.h"
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
@@ -16,8 +16,8 @@
 #define KMp3FileName @"record.mp3"
 
 
-@interface PDAudioRecordEngine () <AVAudioRecorderDelegate>
-@property (nonatomic, weak) id<PDAudioRecordDelegate> delegate;
+@interface FlutterAudioRecordEngine () <AVAudioRecorderDelegate>
+@property (nonatomic, weak) id<FlutterAudioRecordDelegate> delegate;
 
 @property (nonatomic, copy) NSString *tempFilePath;
 @property (nonatomic, copy) NSString *mp3FilePath;
@@ -34,9 +34,9 @@
 @end
 
 
-@implementation PDAudioRecordEngine
+@implementation FlutterAudioRecordEngine
 
-- (instancetype)initWithDelegate:(id<PDAudioRecordDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<FlutterAudioRecordDelegate>)delegate {
     if (self = [super init]) {
         _delegate = delegate;
 
@@ -101,7 +101,7 @@
     [_audioRecorder record];
 
     _recordSeconds = 0;
-    _recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateTime) userInfo:nil repeats:YES];
+    _recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(uFlutterateTime) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_recordTimer forMode:NSRunLoopCommonModes];
 }
 
@@ -164,7 +164,7 @@
     }
 }
 
-- (void)updateTime {
+- (void)uFlutterateTime {
     _recordSeconds += 0.1;
     [_delegate recordProgress:_recordSeconds];
 

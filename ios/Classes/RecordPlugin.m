@@ -9,14 +9,14 @@
 #import "RecordPlugin.h"
 #import <Flutter/Flutter.h>
 #import <UIKit/UIKit.h>
-#import "PDAudioPlayEngine.h"
-#import "PDAudioRecordEngine.h"
+#import "FlutterAudioPlayEngine.h"
+#import "FlutterAudioRecordEngine.h"
 
 #define KMaxRecrodLength 180.0
 
-@interface RecordPlugin() <PDAudioPlayDelegate, PDAudioRecordDelegate>
-@property (nonatomic, strong) PDAudioPlayEngine *playEngine;
-@property (nonatomic, strong) PDAudioRecordEngine *recordEngine;
+@interface RecordPlugin() <FlutterAudioPlayDelegate, FlutterAudioRecordDelegate>
+@property (nonatomic, strong) FlutterAudioPlayEngine *playEngine;
+@property (nonatomic, strong) FlutterAudioRecordEngine *recordEngine;
 
 @property (nonatomic, strong) FlutterMethodChannel *channel;
 
@@ -34,8 +34,8 @@
     if (self = [super init]) {
         _channel = [FlutterMethodChannel methodChannelWithName:@"record_plugin" binaryMessenger:registrar.messenger];
 
-        _playEngine = [[PDAudioPlayEngine alloc] initWithDelegate:self];
-        _recordEngine = [[PDAudioRecordEngine alloc] initWithDelegate:self];
+        _playEngine = [[FlutterAudioPlayEngine alloc] initWithDelegate:self];
+        _recordEngine = [[FlutterAudioRecordEngine alloc] initWithDelegate:self];
         [_recordEngine setMaxDuration:KMaxRecrodLength];
     }
     return self;

@@ -1,16 +1,16 @@
 //
-//  PDAudioPlayEngine.m
+//  FlutterAudioPlayEngine.m
 //  pedi
 //
 //  Created by li xiaolin on 2017/12/11.
 //  Copyright © 2017年 北京嘉润云众健康科技有限公司. All rights reserved.
 //
 
-#import "PDAudioPlayEngine.h"
+#import "FlutterAudioPlayEngine.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface PDAudioPlayEngine () <AVAudioPlayerDelegate>
-@property (nonatomic, weak) id<PDAudioPlayDelegate> delegate;
+@interface FlutterAudioPlayEngine () <AVAudioPlayerDelegate>
+@property (nonatomic, weak) id<FlutterAudioPlayDelegate> delegate;
 
 @property (nonatomic, copy) NSString *mp3FilePath;
 
@@ -18,9 +18,9 @@
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @end
 
-@implementation PDAudioPlayEngine
+@implementation FlutterAudioPlayEngine
 
-- (instancetype)initWithDelegate:(id<PDAudioPlayDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<FlutterAudioPlayDelegate>)delegate {
     if (self = [super init]) {
         _delegate = delegate;
     }

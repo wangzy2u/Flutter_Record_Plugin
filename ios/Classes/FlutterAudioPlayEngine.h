@@ -1,5 +1,5 @@
 //
-//  PDAudioPlayEngine.h
+//  FlutterAudioPlayEngine.h
 //  pedi
 //
 //  Created by li xiaolin on 2017/12/11.
@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol PDAudioPlayDelegate <NSObject>
+@protocol FlutterAudioPlayDelegate <NSObject>
 - (void)playComplete;
 - (void)playError:(NSString *)error;
 @end
 
-@interface PDAudioPlayEngine : NSObject
-- (instancetype)initWithDelegate:(id<PDAudioPlayDelegate>)delegate;
+@interface FlutterAudioPlayEngine : NSObject
+- (instancetype)initWithDelegate:(id<FlutterAudioPlayDelegate>)delegate;
 
 - (void)start:(NSString *)mp3Path;
 

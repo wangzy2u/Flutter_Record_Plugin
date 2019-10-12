@@ -7,7 +7,7 @@
 //
 
 #import "PDAudioRecordEngine.h"
-#import "Lame/lame.h"
+#import "lame.h"
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 

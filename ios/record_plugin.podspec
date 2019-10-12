@@ -15,8 +15,9 @@ A new Flutter plugin.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.vendored_libraries = 'Classes/Lame/libmp3lame.a'
-
+  s.vendored_libraries = 'Framework/libmp3lame.a'
+  s.ios.vendored_frameworks = 'Frameworks/libmp3lame.a'
+  s.vendored_frameworks = 'libmp3lame.a'
   s.ios.deployment_target = '8.0'
 end
 

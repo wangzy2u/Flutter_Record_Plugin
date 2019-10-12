@@ -90,44 +90,44 @@
 - (void)startPlay:(FlutterResult)result path:(NSString *)path {
     NSLog(@"startPlay %@", path);
     [_playEngine start:path];
-    result(@"true");
+    result(@(YES));
 }
 
 - (void)pausePlay:(FlutterResult)result {
     NSLog(@"pausePlay");
     [_playEngine pause];
-    result(@"true");
+    result(@(YES));
 }
 
 - (void)resumePlay:(FlutterResult)result {
     NSLog(@"resumePlay");
     [_playEngine play];
-    result(@"true");
+    result(@(YES));
 }
 
 - (void)stopPlay:(FlutterResult)result {
     NSLog(@"stopPlay");
     [_playEngine stop];
-    result(@"true");
+    result(@(YES));
 }
 
 
 - (void)startRecord:(FlutterResult)result {
     NSLog(@"startRecord");
     [_recordEngine start];
-    result(@"true");
+    result(@(YES));
 }
 
 - (void)pauseRecord:(FlutterResult)result {
     NSLog(@"pauseRecord");
     [_recordEngine pause];
-    result(@"true");
+    result(@(YES));
 }
 
 - (void)resumeRecord:(FlutterResult)result {
     NSLog(@"resumeRecord");
     [_recordEngine record];
-    result(@"true");
+    result(@(YES));
 }
 
 - (void)stopRecord:(FlutterResult)result {

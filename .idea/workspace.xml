@@ -4,23 +4,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d448ca18-290b-4103-a5b3-4fc641c8788b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/Lame/lame.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/Lame/libmp3lame.a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/PDAudioPlayEngine.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PDAudioPlayEngine.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/PDAudioPlayEngine.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PDAudioPlayEngine.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/PDAudioRecordEngine.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PDAudioRecordEngine.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/PDAudioRecordEngine.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/PDAudioRecordEngine.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/RecordPlugin.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/RecordPlugin.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/RecordPlugin.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/RecordPlugin.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftRecordPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftRecordPlugin.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/record_plugin.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/record_plugin.podspec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-    </list>
+    <list default="true" id="d448ca18-290b-4103-a5b3-4fc641c8788b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -93,7 +77,11 @@
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/.packages">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="6" column="68" selection-start-line="6" selection-start-column="68" selection-end-line="6" selection-end-column="68" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -348,7 +336,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Catdea" order="9" />
-      <window_info anchor="bottom" id="Run" order="10" visible="true" weight="0.43255132" />
+      <window_info anchor="bottom" id="Run" order="10" weight="0.43255132" />
       <window_info anchor="bottom" id="Find" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.34017596" />
       <window_info anchor="right" id="Theme Preview" order="0" />
@@ -552,7 +540,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/.packages">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="6" column="68" selection-start-line="6" selection-start-column="68" selection-end-line="6" selection-end-column="68" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

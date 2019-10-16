@@ -58,6 +58,24 @@ android {
         jniLibs.srcDirs = ['libs']
     }
 
+    //运行版本配置
+    buildTypes {
+
+        //调试版本
+        debug {
+            ndk { abiFilters "armeabi-v7a","x86" }
+            minifyEnabled false
+        }
+
+        //发布版本
+        release {
+            ndk { abiFilters "armeabi-v7a","armeabi" }
+            minifyEnabled false
+
+        }
+
+    }
+
     flavorDimensions "env_type"
 }
 

@@ -4,7 +4,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d448ca18-290b-4103-a5b3-4fc641c8788b" name="Default Changelist" comment="" />
+    <list default="true" id="d448ca18-290b-4103-a5b3-4fc641c8788b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -81,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="53" column="32" lean-forward="true" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+            <state relative-caret-position="33">
+              <caret line="50" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -168,8 +170,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-3" />
+    <option name="y" value="2" />
     <option name="width" value="1935" />
     <option name="height" value="1040" />
   </component>
@@ -193,6 +196,33 @@
               <item name="Flutter_Record_Plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flutter_Record_Plugin" type="462c0819:PsiDirectoryNode" />
               <item name="android" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Flutter_Record_Plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flutter_Record_Plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Flutter_Record_Plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flutter_Record_Plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="arm64-v8a" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Flutter_Record_Plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flutter_Record_Plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="armeabi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Flutter_Record_Plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flutter_Record_Plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="armeabi-v7a" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flutter_Record_Plugin" type="b2602c69:ProjectViewProjectNode" />
@@ -274,7 +304,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="334" y="117" width="1548" height="832" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" />
@@ -284,7 +314,7 @@
       <window_info id="Resources Explorer" order="4" weight="0.32908848" />
       <window_info id="Build Variants" order="5" side_tool="true" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.26340482" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.2637584" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.32988167" />
       <window_info anchor="bottom" id="TODO" order="1" />
@@ -296,7 +326,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Catdea" order="9" />
-      <window_info anchor="bottom" id="Run" order="10" visible="true" weight="0.31085044" />
+      <window_info anchor="bottom" id="Run" order="10" weight="0.044378698" />
       <window_info anchor="bottom" id="Find" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.34017596" />
       <window_info anchor="right" id="Theme Preview" order="0" />
@@ -549,8 +579,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="53" column="32" lean-forward="true" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+        <state relative-caret-position="33">
+          <caret line="50" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
         </state>
       </provider>
     </entry>

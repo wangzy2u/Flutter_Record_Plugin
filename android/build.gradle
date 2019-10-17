@@ -39,16 +39,6 @@ android {
         minSdkVersion 16
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        ndk {
-           moduleName "libmp3lame"//生成的so名字
-           //声明启用Android日志, 在c/c++的源文件中使用的#include <android/log.h> 日志将得到输出
-           ldLibs "log"
-           // 声明创建指定cpu架构的so库, 不声明的话, 默认(gradle 1.5.0)会生成4中架构 多一种mips架构
-           // 具体cpu架构的区别请参考:
-           // for detailed abiFilter descriptions, refer to "Supported ABIs" @
-           // https://developer.android.com/ndk/guides/abis.html#sa
-           abiFilters "armeabi", "x86"
-       }
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -58,25 +48,6 @@ android {
         jniLibs.srcDirs = ['libs']
     }
 
-    //运行版本配置
-    buildTypes {
-
-        //调试版本
-        debug {
-            ndk { abiFilters "armeabi-v7a","armeabi" }
-            minifyEnabled false
-        }
-
-        //发布版本
-        release {
-            ndk { abiFilters "armeabi-v7a","armeabi" }
-            minifyEnabled false
-
-        }
-
-    }
-
-    flavorDimensions "env_type"
 }
 
 dependencies {

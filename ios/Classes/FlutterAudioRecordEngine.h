@@ -20,7 +20,7 @@
 
 - (void)setMaxDuration:(float)seconds;
 
-- (void)start;
+- (BOOL)start;
 - (void)reset;
 
 - (void)pause;

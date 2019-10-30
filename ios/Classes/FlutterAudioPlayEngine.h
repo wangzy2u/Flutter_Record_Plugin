@@ -16,7 +16,7 @@
 @interface FlutterAudioPlayEngine : NSObject
 - (instancetype)initWithDelegate:(id<FlutterAudioPlayDelegate>)delegate;
 
-- (void)start:(NSString *)mp3Path;
+- (BOOL)start:(NSString *)mp3Path;
 
 - (void)pause;
 - (void)play;

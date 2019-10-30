@@ -27,7 +27,7 @@
     return self;
 }
 
-- (void)start:(NSString *)mp3Path {
+- (BOOL)start:(NSString *)mp3Path {
 
     [self setRecordSession];
 
@@ -36,11 +36,12 @@
     if (_audioPlayer == nil) {
         NSString *message = [NSString stringWithFormat:@"start %@", [[error userInfo] description]];
         [_delegate playError:message];
-        return;
+        return NO;
     }
     _audioPlayer.delegate = self;
     [_audioPlayer prepareToPlay];
     [_audioPlayer play];
+    return YES;
 }
 
 - (void)setRecordSession {

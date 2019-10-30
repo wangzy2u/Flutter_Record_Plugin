@@ -89,8 +89,8 @@
 
 - (void)startPlay:(FlutterResult)result path:(NSString *)path {
     NSLog(@"startPlay %@", path);
-    [_playEngine start:path];
-    result(@(YES));
+    BOOL playResult = [_playEngine start:path];
+    result(@(playResult));
 }
 
 - (void)pausePlay:(FlutterResult)result {
@@ -114,8 +114,8 @@
 
 - (void)startRecord:(FlutterResult)result {
     NSLog(@"startRecord");
-    [_recordEngine start];
-    result(@(YES));
+    BOOL recordResult = [_recordEngine start];
+    result(@(recordResult));
 }
 
 - (void)pauseRecord:(FlutterResult)result {

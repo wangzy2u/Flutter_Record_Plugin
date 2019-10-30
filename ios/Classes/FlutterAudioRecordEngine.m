@@ -76,13 +76,12 @@
     _maxDuration = seconds;
 }
 
-- (void)start {
+- (BOOL)start {
     [self cleanFolder];
 
     if (![self checkRecordPermission]) {
         [self showRecordPermissionAlert];
-        
-        return;
+        return NO;
     }
 
     [self setRecordSession];
@@ -93,7 +92,7 @@
     if (_audioRecorder == nil) {
         NSString *message = [NSString stringWithFormat:@"start %@", [[error userInfo] description]];
         [_delegate recordError:message];
-        return;
+        return NO;
     }
     [_audioRecorder setDelegate:self];
     [_audioRecorder prepareToRecord];
@@ -103,6 +102,7 @@
     _recordSeconds = 0;
     _recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(uFlutterateTime) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_recordTimer forMode:NSRunLoopCommonModes];
+    return YES;
 }
 
 - (void)cleanFolder {

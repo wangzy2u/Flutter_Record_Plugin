@@ -79,7 +79,7 @@
 - (BOOL)start {
     [self cleanFolder];
 
-    if (![self checkRecordPermission]) {
+    if (![self checkPermission]) {
         return NO;
     }
 
@@ -110,9 +110,27 @@
     [mgr removeItemAtPath:_mp3FilePath error:nil];
 }
 
-- (BOOL)checkRecordPermission {
-    AVAuthorizationStatus statusAudio = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
-    return (statusAudio != AVAuthorizationStatusDenied);
+- (BOOL)checkPermission {
+    __block BOOL result = NO;
+    AVAuthorizationStatus videoAuthStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    //判断是否询问过用户授权麦克风（否则检测麦克风权限，会被APP询问授权弹窗打断）
+    if (videoAuthStatus == AVAuthorizationStatusNotDetermined) {
+        // 未询问过用户是否授权，进行第一次询问
+        AVAudioSession *avSession = [AVAudioSession sharedInstance];
+        if ([avSession respondsToSelector:@selector(requestRecordPermission:)]) {
+            [avSession requestRecordPermission:^(BOOL available) {
+            }];
+        }
+        result = NO;
+    } else {
+        AVAudioSession *avSession = [AVAudioSession sharedInstance];
+        if ([avSession respondsToSelector:@selector(requestRecordPermission:)]) {
+            [avSession requestRecordPermission:^(BOOL available) {
+                result = available;
+            }];
+        }
+    }
+    return result;
 }
 
 - (void)setRecordSession {

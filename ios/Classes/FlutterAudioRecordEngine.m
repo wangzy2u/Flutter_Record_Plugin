@@ -79,10 +79,10 @@
 - (BOOL)start {
     [self cleanFolder];
 
-    if (![self checkRecordPermission]) {
-        [self showRecordPermissionAlert];
-        return NO;
-    }
+//    if (![self checkRecordPermission]) {
+//        [self showRecordPermissionAlert];
+//        return NO;
+//    }
 
     [self setRecordSession];
 

@@ -79,10 +79,9 @@
 - (BOOL)start {
     [self cleanFolder];
 
-//    if (![self checkRecordPermission]) {
-//        [self showRecordPermissionAlert];
-//        return NO;
-//    }
+    if (![self checkRecordPermission]) {
+        return NO;
+    }
 
     [self setRecordSession];
 
@@ -112,24 +111,8 @@
 }
 
 - (BOOL)checkRecordPermission {
-    __block BOOL result = NO;
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    if ([audioSession respondsToSelector:@selector(requestRecordPermission:)]) {
-        [audioSession performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
-            result = granted;
-        }];
-    }
-    return result;
-}
-
-- (void)showRecordPermissionAlert {
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"应用需要访问您的麦克风。\n请启用麦克风-设置/隐私/麦克风" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
-//    [alertView showWithCompletionHandler:^(NSInteger buttonIndex) {
-//        if (buttonIndex == 0) {
-//            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-//            [[UIApplication sharedApplication] openURL:url];
-//        }
-//    }];
+    AVAuthorizationStatus statusAudio = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    return (statusAudio != AVAuthorizationStatusDenied);
 }
 
 - (void)setRecordSession {
